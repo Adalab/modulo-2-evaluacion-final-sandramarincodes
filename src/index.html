@@ -3,18 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Adalab Web Starter Kit</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
+    <title>Online Store</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./scss/main.scss" />
     <link rel="icon" href="./images/favicon.png" />
   </head>
 
   <body>
-    <div class="page">
-      <load src="./partials/header.html" title="Bienvenidos a Adalab" />
-      <load src="./partials/main.html" />
-      <load src="./partials/footer.html" />
-    </div>
+    <header>
+      <h1>Online Store</h1>
+      <form>
+        <input type="text" placeholder="Example: Women" />
+        <button>Find</button>
+      </form>
+    </header>
+    <main>
+      <section class="section-store">
+        <div>
+          <h2>Shopping Cart</h2>
+          <ul class="js_shopping-cart"></ul>
+        </div>
+
+        <div>
+          <h2>Most popular products</h2>
+          <ul class="js_list">
+            <!-- <li class="js_li-list"></li> -->
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer><p>Online Store © Adalab 2025</p></footer>
+
     <script src="./js/main.js"></script>
   </body>
 </html>

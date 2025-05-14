@@ -1,7 +1,18 @@
-@use 'core/reset';
-@use 'components/code';
-@use 'components/links';
-@use 'layout/page';
-@use 'layout/header';
-@use 'layout/footer';
-@use 'pages/index';
+.section-store {
+  display: flex;
+  gap: 300px;
+  justify-content: center;
+}
+
+h1 {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+}
+
+.js_list {
+  list-style: none;
+}
