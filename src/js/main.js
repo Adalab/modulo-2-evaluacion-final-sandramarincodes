@@ -32,8 +32,6 @@ function renderProduct(product) {
   let divClass;
   if (isOnCart) {
     divClass = "selected-card";
-  } else {
-    divClass = "card";
   }
 
   let buttonText;
@@ -57,6 +55,27 @@ function renderAllProducts(productList) {
   const btnsCart = document.querySelectorAll(".js_btn-cart");
   for (const btn of btnsCart) {
     btn.addEventListener("click", handleAddToCart);
+  }
+}
+
+
+
+function renderShoppingCartProduct(product) {
+  let imgURL;
+  if (product.image === "") {
+    imgURL = "https://placehold.co/600x400";
+  } else {
+    imgURL = product.image;
+  }
+  return `<li><div><img src="${imgURL}" style="width: 200px;"/>
+    <p>${product.title}</p><p>${product.price}</p>
+    </div></li>`;
+}
+
+function renderAllShoppingCartProducts(productList) {
+  ulShopping.innerHTML = "";
+  for (const product of productList) {
+    ulShopping.innerHTML += renderShoppingCartProduct(product);
   }
 }
 
@@ -84,12 +103,13 @@ function handleSearch(event) {
 function handleAddToCart(event) {
   event.preventDefault();
   const clickedId = parseInt(event.currentTarget.id);
-  const productToCart = storeProducts.find(
+  const foundProduct = storeProducts.find(
     (product) => product.id === clickedId
   );
-  if (!shoppingCart.find((item) => item.id === productToCart.id)) {
-    shoppingCart.push(productToCart);
+  if (!shoppingCart.find((item) => item.id === foundProduct.id)) {
+    shoppingCart.push(foundProduct);
     renderAllProducts(currentProductList);
+    renderAllShoppingCartProducts(shoppingCart);
   }
 }
 
