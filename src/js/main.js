@@ -58,8 +58,6 @@ function renderAllProducts(productList) {
   }
 }
 
-
-
 function renderShoppingCartProduct(product) {
   let imgURL;
   if (product.image === "") {
@@ -77,7 +75,10 @@ function renderAllShoppingCartProducts(productList) {
   for (const product of productList) {
     ulShopping.innerHTML += renderShoppingCartProduct(product);
   }
+  // Almacenar información en el localStorage
+  localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
 }
+// si ya  tengo productos en local storage pinta los del local.
 
 function getProducts() {
   fetch(url)
@@ -115,6 +116,12 @@ function handleAddToCart(event) {
 
 // Sección de eventos
 btnSearch.addEventListener("click", handleSearch);
+
+// Local storage shoping cart restore
+if (localStorage.getItem("shoppingCart") !== null) {
+  shoppingCart = JSON.parse(localStorage.getItem("shoppingCart"));
+  renderAllShoppingCartProducts(shoppingCart);
+}
 
 // Sección de código a ejecutar cuando carga la página
 getProducts();
