@@ -66,7 +66,7 @@ function renderShoppingCartProduct(product) {
     imgURL = product.image;
   }
   return `<li><div><img src="${imgURL}" style="width: 200px;"/>
-    <p>${product.title}</p><p>${product.price}</p>
+    <p>${product.title}</p><p>${product.price}</p><button class="js_btn-shopping" id="${product.id}">X</button>
     </div></li>`;
 }
 
@@ -75,17 +75,30 @@ function renderAllShoppingCartProducts(productList) {
   for (const product of productList) {
     ulShopping.innerHTML += renderShoppingCartProduct(product);
   }
+
+  const btnShopping = document.querySelectorAll(".js_btn-shopping");
+  for (const btn of btnShopping) {
+    btn.addEventListener("click", handleDeleteFromCart);
+  }
+
   // Almacenar información en el localStorage
   localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
 }
-// si ya  tengo productos en local storage pinta los del local.
 
 function getProducts() {
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
       storeProducts = data;
+
+      // Local storage shoping cart restore
+      if (localStorage.getItem("shoppingCart") !== null) {
+        shoppingCart = JSON.parse(localStorage.getItem("shoppingCart"));
+      }
+
       renderAllProducts(storeProducts);
+
+      renderAllShoppingCartProducts(shoppingCart);
     });
 }
 
@@ -97,7 +110,6 @@ function handleSearch(event) {
   const filteredProducts = storeProducts.filter((product) =>
     product.title.toLowerCase().includes(valueSearch.toLowerCase())
   );
-  console.log(filteredProducts);
   renderAllProducts(filteredProducts);
 }
 
@@ -114,14 +126,17 @@ function handleAddToCart(event) {
   }
 }
 
-// Sección de eventos
-btnSearch.addEventListener("click", handleSearch);
-
-// Local storage shoping cart restore
-if (localStorage.getItem("shoppingCart") !== null) {
-  shoppingCart = JSON.parse(localStorage.getItem("shoppingCart"));
+function handleDeleteFromCart(event) {
+  const deleteProductId = parseInt(event.currentTarget.id);
+  shoppingCart = shoppingCart.filter(
+    (product) => product.id !== deleteProductId
+  );
+  renderAllProducts(currentProductList);
   renderAllShoppingCartProducts(shoppingCart);
 }
+
+// Sección de eventos // desde el botón // va a parte.
+btnSearch.addEventListener("click", handleSearch);
 
 // Sección de código a ejecutar cuando carga la página
 getProducts();
