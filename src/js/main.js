@@ -29,20 +29,23 @@ function renderProduct(product) {
     }
   }
 
-  let divClass;
-  if (isOnCart) {
-    divClass = "selected-card";
-  }
-
   let buttonText;
   if (isOnCart) {
     buttonText = "Eliminar";
   } else {
     buttonText = "Comprar";
   }
-  return `<li><div class="${divClass}"><img src="${imgURL}" style="width: 200px;"/>
+
+  let buttonClass;
+  if (isOnCart) {
+    buttonClass = "btn-delete";
+  } else {
+    buttonClass = "btn-buy";
+  }
+
+  return `<li><div><img src="${imgURL}" style="width: 200px;"/>
     <p>${product.title}</p><p>${product.price}</p>
-    <button class="js_btn-cart" id="${product.id}">${buttonText}</button></div></li>`;
+    <button class="js_btn-cart ${buttonClass}" id="${product.id}">${buttonText}</button></div></li>`;
 }
 
 function renderAllProducts(productList) {
@@ -121,9 +124,11 @@ function handleAddToCart(event) {
   );
   if (!shoppingCart.find((item) => item.id === foundProduct.id)) {
     shoppingCart.push(foundProduct);
-    renderAllProducts(currentProductList);
-    renderAllShoppingCartProducts(shoppingCart);
+  } else {
+    shoppingCart = shoppingCart.filter((item) => item.id !== foundProduct.id);
   }
+  renderAllProducts(currentProductList);
+  renderAllShoppingCartProducts(shoppingCart);
 }
 
 function handleDeleteFromCart(event) {

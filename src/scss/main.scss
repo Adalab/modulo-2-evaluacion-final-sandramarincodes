@@ -33,10 +33,15 @@ form {
   justify-content: center;
 }
 
-.selected-card {
-  background-color: rgb(10, 22, 129);
+.btn-delete {
+  background-color: rgb(184, 8, 8);
   color: aliceblue;
   font-weight: bold;
+  padding: 5px 12px;
+}
+
+.btn-buy {
+  padding: 5px 12px;
 }
 
 .shopping-cart-ul {
