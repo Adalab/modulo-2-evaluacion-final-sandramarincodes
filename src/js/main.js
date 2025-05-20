@@ -79,6 +79,16 @@ function renderAllShoppingCartProducts(productList) {
     ulShopping.innerHTML += renderShoppingCartProduct(product);
   }
 
+  if (shoppingCart.length >= 1) {
+    ulShopping.innerHTML += `<button class="js_clear-cart">Vaciar carrito</button>`;
+  }
+
+  const buttonClear = document.querySelector(".js_clear-cart");
+
+  if (buttonClear) {
+  buttonClear.addEventListener("click", handleClearCart);
+  }
+
   const btnShopping = document.querySelectorAll(".js_btn-shopping");
   for (const btn of btnShopping) {
     btn.addEventListener("click", handleDeleteFromCart);
@@ -136,6 +146,13 @@ function handleDeleteFromCart(event) {
   shoppingCart = shoppingCart.filter(
     (product) => product.id !== deleteProductId
   );
+  renderAllProducts(currentProductList);
+  renderAllShoppingCartProducts(shoppingCart);
+}
+
+function handleClearCart(event) {
+  shoppingCart = [];
+  localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
   renderAllProducts(currentProductList);
   renderAllShoppingCartProducts(shoppingCart);
 }
