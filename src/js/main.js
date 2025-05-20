@@ -43,7 +43,7 @@ function renderProduct(product) {
     buttonClass = "btn-buy";
   }
 
-  return `<li><div><img src="${imgURL}" style="width: 200px;"/>
+  return `<li><div class="product-card"><img src="${imgURL}" style="width: 200px;"/>
     <p>${product.title}</p><p>${product.price}</p>
     <button class="js_btn-cart ${buttonClass}" id="${product.id}">${buttonText}</button></div></li>`;
 }
@@ -54,7 +54,7 @@ function renderAllProducts(productList) {
   for (const product of productList) {
     ulList.innerHTML += renderProduct(product);
   }
-  // al principio lo puse esto fuera pero no tiene sentido porque los botones aún no existen no? al principio puse queryselector normal y solo seleeccionaba un elemento.
+
   const btnsCart = document.querySelectorAll(".js_btn-cart");
   for (const btn of btnsCart) {
     btn.addEventListener("click", handleAddToCart);
@@ -68,7 +68,7 @@ function renderShoppingCartProduct(product) {
   } else {
     imgURL = product.image;
   }
-  return `<li><div><img src="${imgURL}" style="width: 200px;"/>
+  return `<li><div><img class="cart-img" src="${imgURL}" style="width: 200px;"/>
     <p>${product.title}</p><p>${product.price}</p><button class="js_btn-shopping" id="${product.id}">X</button>
     </div></li>`;
 }
@@ -86,7 +86,7 @@ function renderAllShoppingCartProducts(productList) {
   const buttonClear = document.querySelector(".js_clear-cart");
 
   if (buttonClear) {
-  buttonClear.addEventListener("click", handleClearCart);
+    buttonClear.addEventListener("click", handleClearCart);
   }
 
   const btnShopping = document.querySelectorAll(".js_btn-shopping");
