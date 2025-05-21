@@ -44,8 +44,8 @@ function renderProduct(product) {
   }
 
   return `<li><div class="product-card"><img src="${imgURL}" style="width: 200px;"/>
-    <p>${product.title}</p><p>${product.price}</p>
-    <button class="js_btn-cart ${buttonClass}" id="${product.id}">${buttonText}</button></div></li>`;
+    <p>${product.title}</p><p class="product-price">${product.price} €</p>
+    <button class="js_btn-store ${buttonClass}" id="${product.id}">${buttonText}</button></div></li>`;
 }
 
 function renderAllProducts(productList) {
@@ -55,8 +55,8 @@ function renderAllProducts(productList) {
     ulList.innerHTML += renderProduct(product);
   }
 
-  const btnsCart = document.querySelectorAll(".js_btn-cart");
-  for (const btn of btnsCart) {
+  const btnsStore = document.querySelectorAll(".js_btn-store");
+  for (const btn of btnsStore) {
     btn.addEventListener("click", handleAddToCart);
   }
 }
@@ -69,7 +69,7 @@ function renderShoppingCartProduct(product) {
     imgURL = product.image;
   }
   return `<li><div><img class="cart-img" src="${imgURL}" style="width: 200px;"/>
-    <p>${product.title}</p><p>${product.price}</p><button class="js_btn-shopping" id="${product.id}">X</button>
+    <p>${product.title}</p><p class="product-price">${product.price} €</p><button class="js_btn-shopping" id="${product.id}">X</button>
     </div></li>`;
 }
 
