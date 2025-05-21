@@ -31,9 +31,9 @@ function renderProduct(product) {
 
   let buttonText;
   if (isOnCart) {
-    buttonText = "Eliminar";
+    buttonText = "Delete";
   } else {
-    buttonText = "Comprar";
+    buttonText = "Buy";
   }
 
   let buttonClass;
@@ -80,7 +80,7 @@ function renderAllShoppingCartProducts(productList) {
   }
 
   if (shoppingCart.length >= 1) {
-    ulShopping.innerHTML += `<button class="js_clear-cart">Vaciar carrito</button>`;
+    ulShopping.innerHTML += `<button class="js_clear-cart">Clear cart</button>`;
   }
 
   const buttonClear = document.querySelector(".js_clear-cart");
